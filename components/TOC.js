@@ -6,7 +6,17 @@ class TOC extends Component {
         var data = this.props.data;
         var i = 0;
         while(i < data.length){
-            lists.push(<li key={data[i].id}><a href={"/content/"+data[i].id}>{data[i].title}</a></li>); //자동으로 elements 생성, 각 element는 key값을 가져야하므로 li 뒤에 key를 붙임//
+            lists.push(
+            <li key={data[i].id}>
+                <a 
+                href={"/content/"+data[i].id}
+                data-id={data[i].id}
+                onClick={function(e){                    
+                    e.preventDefault();
+                    this.props.onChangePage(e.target.dataset.id);
+                }.bind(this)}
+                >{data[i].title}</a>
+            </li>); //자동으로 elements 생성, 각 element는 key값을 가져야하므로 li 뒤에 key를 붙임//
             i = i + 1;
         }
       return (
